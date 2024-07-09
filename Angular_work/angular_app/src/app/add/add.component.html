@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <label>Add Order:</label>
+<form [formGroup]="orderForm" (submit)="addOrder()">
+      <label for="id" class="form-component">Order ID </label><br>
+      <input id="id" class="input" type="text" placeholder="ID" formControlName="id"><br>
+      @if (orderForm.controls.id.invalid && orderForm.controls.id.touched) {
+        @if (orderForm.controls.id.errors?.['required']) {
+            <small>*ID is a required field</small>
+            <br>
+        }
+        @if (orderForm.controls.id.errors?.['pattern']) {
+            <small>*ID must be a number</small>
+            <br>
+        }
+    }
+      <label class="form-component" for="name">Order Name </label><br>
+      <input id="name" class="input" type="text" placeholder="name" formControlName="name">
+      @if (orderForm.controls.name.invalid && orderForm.controls.name.touched) {
+        @if (orderForm.controls.name.errors?.['required']) {
+            <br/>
+            <small>*Name is a required field</small>
+        }
+        @if (orderForm.controls.name.errors?.['minlength']) {
+            <br>
+            <small>*Name must be at least 4 characters long</small>
+        }
+      }
+      <br>
+      <button class="btn btn-primary" type="submit" [disabled]="orderForm.invalid">Add</button><br>
+  </form>
+</div>
